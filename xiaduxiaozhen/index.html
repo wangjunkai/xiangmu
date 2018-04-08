@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="MobileOptimized" content="420">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <title>味莱超市</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <link rel="stylesheet" href="plugin/css/swiper.min.css">
+    <script src="plugin/js/jquery-1.12.4.min.js"></script>
+    <script src="plugin/js/swiper.min.js"></script>
+    <script src="js/global.js"></script>
+    <style>
+        .weilai-index {
+            transition: all .2s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .weilai-index-top {
+            padding: 20px 5px;
+            display: table;
+            width: 100%;
+        }
+
+        .weilai-index-top .top_cell {
+            display: table-cell;
+            text-align: center;
+        }
+
+        .weilai-index-top img {
+            width: 20px;
+            vertical-align: middle;
+        }
+
+        .weilai-index .top_cell {
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .weilai-index-top .input_group {
+            margin: 0 5px;
+        }
+
+        .weilai-index-top input {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #b1b1b1;
+            border-radius: 5px;
+            font-size: 16px;
+            text-indent: 15px;
+            background: #fff9d7;
+        }
+
+        .weilai-index-top input::placeholder {
+            font-size: 14px;
+        }
+
+        .weilai-index-top .input_search {
+            position: absolute;
+            top: 0;
+            line-height: 30px;
+            right: 5px;
+        }
+
+        .weilai-index-top .input_search img {
+            padding: 0px 2px;
+            margin: 0 3px 2px 5px;
+        }
+
+        .weilai-index-group {
+            margin: 15px 0;
+        }
+
+        .weilai-index-group .group_title {
+            margin: 7px auto;
+            display: block;
+            height: 16px;
+            width: auto;
+        }
+
+        .weilai-index-group .group_content_broad {
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            width: 100%;
+            font-size: 0;
+        }
+
+        .weilai-index-group .group_content_broad .broad_cell {
+
+        }
+
+        .weilai-index-group .group_content_detail {
+            position: relative;
+            padding-left: 30%;
+            margin-bottom: 15px;
+            transition: all .2s ease-in-out;
+        }
+
+        .weilai-index-group .detail_cell_img {
+            width: 30%;
+            position: absolute;
+            left: 0;
+        }
+
+        .weilai-index-group .detail_cell_box {
+            padding: 0 15px;
+            border-top: 1px solid #e4a080;
+        }
+
+        .weilai-index-group .detail_cell_box_title {
+            font-size: 14px;
+            color: #e47541;
+            padding: 8px 0;
+            width: 75%;
+            font-weight: 600;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .weilai-index-group .detail_cell_box_text {
+            font-size: 10px;
+            color: #3c197f;
+            line-height: 1.4;
+            width: 60%;
+        }
+
+        .weilai-index-group .detail_cell_line {
+            margin: 10px 20px 0 30px;
+            border-top: 1px solid #f7c8b2;
+
+        }
+
+        .weilai-index-group .detail_cell_more {
+            width: 25px;
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            margin-top: -15px;
+            animation: page-li 1.3s cubic-bezier(0.11, -0.62, 1, 1.71) infinite;
+        }
+
+        /*user*/
+        .weilai-index-user {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .weilai-index-user-top {
+            padding: 50px 0 30px 15px;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .weilai-index-user-top:after {
+            content: '';
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            background: url(image/index/user/top.png) no-repeat;
+            background-size: 70%;
+            background-position: 125% -15%;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .weilai-index-user-top p {
+            text-align: right;
+            width: 35%;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .weilai-index-user-top .user-top_name {
+            font-size: 20px;
+            color: #3b1880;
+            font-weight: 600;
+        }
+
+        .weilai-index-user-top .user-top_member {
+            font-size: 12px;
+            color: #e05d27;
+        }
+
+        .weilai-index-user-top .user-top_member_icon {
+            border-radius: 100px;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #e05d27;
+            color: #fff;
+            text-align: center;
+            line-height: 15px;
+            margin-left: 3px;
+        }
+
+        .weilai-index-user-type {
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .weilai-index-user-type li {
+            flex: auto;
+            border-top: 1px solid #f59a75;
+            font-size: 14px;
+            color: #616161;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding-left: 20px;
+            transition: all .2s ease-in-out;
+        }
+
+        .weilai-index-user-type li.active {
+            color: #df5710;
+            font-size: 18px;
+            background-color: #fffbd8;
+            box-shadow: 0 2px 20px 4px #dcac98;
+        }
+
+        .weilai-index-user-type img {
+            width: 20px;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+
+        .weilai-index-user-type li.no_border {
+            flex: auto;
+            border-top: 0;
+        }
+
+        .weilai-index-user-type .coupons_number {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 100px;
+            color: #ffffff;
+            background-color: #e22f2f;
+            text-align: center;
+            margin-left: 50%;
+        }
+
+        .weilai-index_user_active {
+            transform: scale(0.9) translate(75%);
+            height: 100%;
+            box-shadow: -2px 0 20px 0 #808080;
+            overflow: hidden;
+        }
+
+        .weilai-index_user_active .weilai-index-active-background {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .weilai-index_user_active .group_content_broad {
+            overflow: hidden;
+        }
+
+        @keyframes page-li {
+            0% {
+                transform: translatex(0)
+            }
+            50% {
+                transform: translatex(-4px)
+            }
+            100% {
+                transform: translatex(0)
+            }
+        }
+
+        .weilai-index-group .group_content_detail.active {
+            transform: scale(0.9);
+            box-shadow: 0 1px 20px 1px #c3c3c3;
+        }
+
+        .group_content_broad a {
+            width: 54%;
+            min-height: 130px;
+            display: inline-block;
+        }
+    </style>
+    <script>
+        $(function () {
+            var mySwiper = new Swiper('.swiper-container', {
+                loop: true,
+
+                pagination: {
+                    el: '.swiper-pagination'
+                }
+            });
+            $('.top_cell_set_active').on('click', function () {
+                $('.weilai-index').addClass('weilai-index_user_active');
+                $('.weilai-index-user').css('display', '')
+            });
+            var bg = $('.weilai-index-active-background');
+            bg.on('click', function (e) {
+                e.stopPropagation();
+                $('.weilai-index').removeClass('weilai-index_user_active');
+                setTimeout(function () {
+                    $('.weilai-index-user').css('display', 'none')
+                }, 300)
+            });
+            bg.on('touchstart touchmove touchend', function (e) {
+                e.stopPropagation();
+            });
+            var typeli = $('.weilai-index-user-type li');
+            typeli.on('touchstart', function () {
+                $(this).addClass('active')
+            });
+            typeli.on('touchend', function () {
+                $(this).removeClass('active')
+            });
+            var contentDetail = $('.weilai-index-group .group_content_detail');
+            contentDetail.on('touchstart', function () {
+                $(this).addClass('active')
+            });
+            contentDetail.on('touchend', function () {
+                $(this).removeClass('active')
+            });
+
+        })
+    </script>
+</head>
+<body>
+<div class="weilai-container">
+    <div class="weilai-index weilai-index-background">
+        <div class="weilai-index-active-background"></div>
+        <div class="weilai-index-top">
+            <div class="top_cell top_cell_set_active">
+                <img src="image/index/left-icon.png" alt="">
+            </div>
+            <div class="top_cell">
+                <div class="input_group">
+                    <input type="text" placeholder="请输入您所搜索的商品">
+                    <span class="input_search">|<img src="image/index/search-icon.png" alt=""></span>
+                </div>
+            </div>
+            <div class="top_cell">
+                <img src="image/index/right-icon.png" alt="">
+            </div>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="image/index/top.png" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="image/index/top.png" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="image/index/top.png" alt="">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="weilai-index-group">
+            <img class="group_title" src="image/index/index_15.png" alt="">
+            <div class="group_content_broad">
+                <a href="">
+                    <img class="broad_cell" src="image/1522635987834.jpg" alt="">
+                </a>
+                <a href=""> <img class="broad_cell" src="image/1522637012402.jpg" alt="">
+                </a>
+                <a href=""> <img class="broad_cell" src="image/1522637053566.jpg" alt="">
+                </a>
+                <a href=""> <img class="broad_cell" src="image/1522637068928.jpg" alt="">
+                </a>
+                <a href=""> <img class="broad_cell" src="image/1522641448109.jpg" alt="">
+                </a>
+                <a href=""> <img class="broad_cell" src="image/1522641492255.jpg" alt="">
+                </a>
+                <a href=""> <img class="broad_cell" src="image/1522641600442.jpg" alt="">
+                </a>
+
+
+            </div>
+        </div>
+        <div class="weilai-index-group">
+            <img class="group_title" src="image/index/index_25.png" alt="">
+            <div class="group_content_detail">
+                <img class="detail_cell_img" src="image/index/index_28.png" alt="">
+                <div class="detail_cell_box">
+                    <p class="detail_cell_box_title">"夏尔葡萄酒吧餐厅"</p>
+                    <p class="detail_cell_box_text">一杯Shiraz葡萄酒，造就一间专业葡萄酒吧餐厅</p>
+                    <p class="detail_cell_line"></p>
+                </div>
+                <img class="detail_cell_more" src="image/index/index_31.png" alt="">
+            </div>
+            <div class="group_content_detail">
+                <img class="detail_cell_img" src="image/index/index_28.png" alt="">
+                <div class="detail_cell_box">
+                    <p class="detail_cell_box_title">"夏尔葡萄酒吧餐厅"</p>
+                    <p class="detail_cell_box_text">一杯Shiraz葡萄酒，造就一间专业葡萄酒吧餐厅</p>
+                    <p class="detail_cell_line"></p>
+                </div>
+                <img class="detail_cell_more" src="image/index/index_31.png" alt="">
+            </div>
+            <div class="group_content_detail">
+                <img class="detail_cell_img" src="image/index/index_28.png" alt="">
+                <div class="detail_cell_box">
+                    <p class="detail_cell_box_title">"夏尔葡萄酒吧餐厅"</p>
+                    <p class="detail_cell_box_text">一杯Shiraz葡萄酒，造就一间专业葡萄酒吧餐厅</p>
+                    <p class="detail_cell_line"></p>
+                </div>
+                <img class="detail_cell_more" src="image/index/index_31.png" alt="">
+            </div>
+            <div class="group_content_detail">
+                <img class="detail_cell_img" src="image/index/index_28.png" alt="">
+                <div class="detail_cell_box">
+                    <p class="detail_cell_box_title">"夏尔葡萄酒吧餐厅"</p>
+                    <p class="detail_cell_box_text">一杯Shiraz葡萄酒，造就一间专业葡萄酒吧餐厅</p>
+                    <p class="detail_cell_line"></p>
+                </div>
+                <img class="detail_cell_more" src="image/index/index_31.png" alt="">
+            </div>
+            <div class="group_content_detail">
+                <img class="detail_cell_img" src="image/index/index_28.png" alt="">
+                <div class="detail_cell_box">
+                    <p class="detail_cell_box_title">"夏尔葡萄酒吧餐厅"</p>
+                    <p class="detail_cell_box_text">一杯Shiraz葡萄酒，造就一间专业葡萄酒吧餐厅</p>
+                    <p class="detail_cell_line"></p>
+                </div>
+                <img class="detail_cell_more" src="image/index/index_31.png" alt="">
+            </div>
+            <div class="group_content_detail">
+                <img class="detail_cell_img" src="image/index/index_28.png" alt="">
+                <div class="detail_cell_box">
+                    <p class="detail_cell_box_title">"夏尔葡萄酒吧餐厅"</p>
+                    <p class="detail_cell_box_text">一杯Shiraz葡萄酒，造就一间专业葡萄酒吧餐厅</p>
+                    <p class="detail_cell_line"></p>
+                </div>
+                <img class="detail_cell_more" src="image/index/index_31.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="weilai-index-user weilai-index-background" style="display: none">
+        <div class="weilai-index-user-top">
+            <p class="user-top_name">Maria Elliott</p>
+            <p class="user-top_member">
+                普通会员
+                <span class="user-top_member_icon">v</span></p>
+        </div>
+        <ul class="weilai-index-user-type">
+            <li>
+                <a href="vegetables-type.html">
+                    <img src="image/index/user/type-icon.png" alt="">
+                    商品分类
+                </a>
+            </li>
+            <li>
+                <a href="wish-list.html">
+                    <img src="image/index/user/wish-icon.png" alt="">
+                    心愿单
+                </a>
+            </li>
+            <li>
+                <a href="new-goods.html">
+                    <img src="image/index/user/new-icon.png" alt="">
+                    新商品
+                </a>
+            </li>
+            <li><a href="member-center.html">
+                <img src="image/index/user/user-icon.png" alt="">
+                会员中心
+            </a></li>
+            <li class="no_border">
+                <a href="member-center.html">
+                    <img src="image/index/user/shop-icon.png" alt="">
+                    积分商城
+                </a></li>
+            <li class="no_border">
+                <a href="member-center.html">
+                    <img src="image/index/user/foot-icon.png" alt="">
+                    会员足迹
+                </a>
+            </li>
+            <li>
+                <a href="coupons.html">
+                    <img src="image/index/user/coupons-icon.png" alt="">
+                    优惠券
+                    <i class="coupons_number">9</i></a>
+            </li>
+            <li>
+            <span>
+                <img src="image/index/user/close-icon.png" alt="">
+                注销
+            </span></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

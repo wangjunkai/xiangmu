@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ditu</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *, :before, :after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .map {
+            height: 100%;
+        }
+
+        .container {
+            width: 85%;
+            height: 85%;
+            margin: auto;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .plugIn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            margin-left: -400px;
+            height: 65px;
+        }
+
+        .plugIn:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .plugIn .plugIn-list {
+            height: 100%;
+            border-radius: 60px;
+            background-color: rgba(234, 234, 234, 0.74);
+            box-shadow: 1px 2px 5px 1px #9c9c9c, inset 0 -5px 10px 1px #cacaca;
+            padding: 0 40px;
+        }
+
+        .plugIn .plugIn-list > li {
+            float: left;
+            width: 80px;
+            text-align: center;
+            font-size: 13px;
+            height: 100%;
+            padding-top: 42px;
+            position: relative;
+        }
+
+        .plugIn .plugIn-list > li.active > i {
+            color: #fff;
+            background: linear-gradient(#2f83d8, #053769);
+            line-height: 55px;
+            border: 0;
+        }
+
+        .plugIn .plugIn-list > li > i {
+            box-shadow: 1px 1px 20px 1px #0a4b8c;
+            width: 55px;
+            height: 55px;
+            border-radius: 30px;
+            background-color: #fff;
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            margin-left: -28px;
+            cursor: pointer;
+            font-size: 34px;
+            color: #0f4479;
+            border: 5px solid #14599e;
+            line-height: 46px;
+        }
+
+        .plugIn .plugIn-box {
+            position: absolute;
+            bottom: 108px;
+            min-width: 100%;
+            background-color: rgba(255, 255, 255, 0.74);
+            box-shadow: 1px 2px 5px 1px #9c9c9c, inset 0 -5px 10px 1px #cacaca;
+            border-radius: 3px;
+            padding: 5px 10px;
+            display: none;
+        }
+
+        .plugIn .plugIn-box > li {
+            line-height: 1.7;
+            border-radius: 2px;
+            font-size: 12px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            white-space: nowrap;
+            text-align: left;
+            padding: 0 5px;
+        }
+
+        .plugIn .plugIn-box > li:hover,
+        .plugIn .plugIn-box > li.active {
+            background-color: #2b67ad;
+            color: #fff;
+        }
+
+        .plugIn .plugIn-box:after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 7px 0 7px;
+            border-color: #b9b9b9 transparent transparent transparent;
+            position: absolute;
+            bottom: -8px;
+            margin-left: -7px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="map" class="map"></div>
+    <div class="plugIn">
+        <ul class="plugIn-list">
+            <li data-v="shield" class="noList">
+                <i class="fa fa-bolt"></i>
+                <span>防护目标</span>
+            </li>
+            <li data-v="alarm">
+                <ul class="plugIn-box">
+                    <li>党政军机关</li>
+                    <li>学校</li>
+                    <li>公众聚集场所</li>
+                    <li>重要场所</li>
+                    <li>在建工程施工场所</li>
+                    <li>公路基础设施</li>
+                    <li>水运基础交通设施</li>
+                    <li>水利设施</li>
+                    <li>电力基础设施</li>
+                    <li>石油天然气设施</li>
+                    <li>领导机构</li>
+                    <li>办事机构</li>
+                    <li>指挥和综合协调机构</li>
+                </ul>
+                <i class="fa fa-university" style="font-size: 25px;"></i>
+                <span>应急机构</span></li>
+            <li data-v="reunion">
+                <ul class="plugIn-box">
+                    <li>专家</li>
+                    <li>军队</li>
+                    <li>武警</li>
+                    <li>公安警察</li>
+                    <li>专业救援队伍</li>
+                </ul>
+                <i class="fa fa-users" style="font-size: 25px;"></i>
+                <span>人力资源</span>
+            </li>
+            <li data-v="plumbering">
+                <ul class="plugIn-box">
+                    <li>战略性储备物资</li>
+                    <li>专用应急物资及储备</li>
+                    <li>基本生活保障物资</li>
+                    <li>应急装备</li>
+                </ul>
+                <i style="font-size: 30px;" class="fa fa-truck"></i>
+                <span>物资储备</span>
+            </li>
+            <li data-v="earth-globe">
+                <ul class="plugIn-box">
+                    <li>通信网</li>
+                    <li>通信保障机构</li>
+                    <li>通信设备</li>
+                </ul>
+                <i class="fa fa-globe"></i>
+                <span>通信资源</span>
+            </li>
+            <li data-v="travel">
+                <ul class="plugIn-box">
+                    <li>运输站场</li>
+                    <li>运输设备</li>
+                    <li>运输保障机构</li>
+                </ul>
+                <i class="fa fa-plane"></i>
+                <span>运输物流</span>
+            </li>
+            <li data-v="hospital">
+                <ul class="plugIn-box">
+                    <li>医疗机构</li>
+                    <li>疾病预防控制中心</li>
+                    <li>卫生监督所</li>
+                    <li>医学科学研究机构</li>
+                    <li>医疗设备和药品</li>
+                    <li>其他医疗卫生资源</li>
+                </ul>
+                <i class="fa fa-heartbeat" style="font-size: 30px;"></i>
+                <span>医疗卫生</span>
+            </li>
+            <li data-v="shelter">
+                <ul class="plugIn-box">
+                    <li>避难场所</li>
+                    <li>人防工程</li>
+                </ul>
+                <i class="fa fa-home"></i>
+                <span>避难场所</span>
+            </li>
+            <li data-v="refund">
+                <ul class="plugIn-box">
+                    <li>专项应急资金</li>
+                    <li>募捐资金</li>
+                    <li>应急保障</li>
+                </ul>
+                <i class="fa fa-bar-chart" style="font-size: 27px;"></i>
+                <span>财力保障</span>
+            </li>
+            <li data-v="desktop" class="noList">
+                <i style="font-size: 25px;" class="fa fa-desktop"></i>
+                <span>视频监控</span>
+            </li>
+        </ul>
+    </div>
+    <div id="r-result"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KIHriAFGf9CvDHA65gvGDuMjpQgvtAyC"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

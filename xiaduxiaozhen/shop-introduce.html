@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="MobileOptimized" content="420">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <title>商品简介</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .weilai-shop-introduce-top{
+            width: 65%;
+            margin: 70px auto 20px auto;
+            display: block;
+        }
+        .weilai-shop-introduce-collection{
+            background-image: url("image/shopIntroduce/collection.png");
+            background-repeat:no-repeat;
+            background-size: contain;
+            width: 120px;
+            height: 40px;
+            margin: auto;
+        }
+        .weilai-shop-introduce-collection.active{
+            background-image: url("image/shopIntroduce/collection-active.png");
+        }
+        .weilai-shop-introduce-text{
+            text-align: center;
+            font-size: 13px;
+            color: #8f77bd;
+            margin: 0 40px;
+            line-height: 1.6;
+            margin-top:15px;
+        }
+        .weilai-shop-introduce-buttons{
+            margin: 0 15px;
+            margin-top:40px;
+            text-align: center;
+            line-height: 35px;
+        }
+        .weilai-shop-introduce-buttons .name{
+            float: left;
+            width: 60%;
+            border-radius: 100px;
+            color: #e05d27;
+            border: 1px solid #8f77bd;
+        }
+        .weilai-shop-introduce-buttons .price{
+            width: 35%;
+            float: right;
+            border: 1px solid #e05d27;
+            background-color: #e05d27;
+            border-radius: 100px;
+            color: #fff;
+            font-size:12px;
+        }
+        .weilai-shop-introduce-buttons .num {
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+<div class="weilai-container">
+    <div class="weilai-shop-introduce weilai-index-background">
+        <img class="weilai-shop-introduce-top" src="image/shopIntroduce/top-icon.png" alt="">
+        <div class="weilai-shop-introduce-collection"></div>
+        <p class="weilai-shop-introduce-text">胡萝卜营养价值丰富，包含多种胡萝卜素,维生素及微量元素等，被称为'平民人参'</p>
+        <p class="weilai-shop-introduce-text">新品上市，折扣多多，收藏参与线下选购！</p>
+        <div class="weilai-shop-introduce-buttons clearfix">
+            <span class="name">胡萝卜</span>
+            <span class="price"><span class="num">¥10</span>/200g</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

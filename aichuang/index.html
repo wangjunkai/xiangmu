@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="MobileOptimized" content="420">
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="renderer" content="webkit">
+  <title>爱船网</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    *, :after, :before {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 微软雅黑;
+    }
+
+    html {
+      font-size: 1px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    button, input, select, textarea {
+      margin: 0;
+      outline-offset: 0;
+      outline-style: none;
+      outline-width: 0;
+      -webkit-font-smoothing: inherit;
+      background-image: none;
+      -webkit-appearance: none !important;
+    }
+
+    .clearfix:after {
+      content: '';
+      display: table;
+      line-height: 0;
+      clear: both;
+    }
+
+    .lt {
+      float: left;
+    }
+
+    .rt {
+      float: right;
+    }
+
+    .row {
+      display: -webkit-box;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+    }
+
+    .col {
+      -webkit-box-flex: 1;
+      -moz-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .col-33 {
+      -webkit-box-flex: 0;
+      -moz-flex: 0 0 33.3333%;
+      -ms-flex: 0 0 33.3333%;
+      flex: 0 0 33.3333%;
+      max-width: 33.3333%;
+    }
+
+    .col-25 {
+      -webkit-box-flex: 0;
+      -moz-flex: 0 0 25%;
+      -ms-flex: 0 0 25%;
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+
+    .l-boat-header {
+      line-height: 44px;
+      font-size: 18rem;
+      padding: 0 15px;
+      background-color: #1ebf5a;
+      color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: auto;
+      height: auto;
+    }
+
+    .l-boat-content {
+      position: absolute;
+      width: auto;
+      height: auto;
+      overflow: scroll;
+      left: 0;
+      right: 0;
+      top: 44px;
+      bottom:0;
+    }
+
+    .l-boat-footer {
+      width: 100%;
+      height: 64px;
+      text-align: center;
+      background-color: #ffffff;
+      color: #636363;
+    }
+
+    .l-boat-header .lt, .l-boat-header .rt {
+      display: inline-block;
+    }
+
+    .l-boat-title {
+      padding: 10px 15px;
+      background-color: #e4e4e4;
+      color: #fff;
+    }
+
+    .l-boat-title .title_search {
+      position: relative;
+      border: 1px solid #1ebf5a;
+    }
+
+    .l-boat-title .search_text {
+      width: 100%;
+      padding: 2px 60px 0 10px;
+      border-radius: 3px;
+      border: 1px solid #ddd;
+      display: block;
+      height: 30px;
+      color: #111;
+      vertical-align: middle;
+      line-height: 14px;
+      font-size: 12px;
+    }
+
+    .l-boat-title .search_button {
+      border: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 60px;
+      height: 100%;
+      font-size: 14rem;
+      background-color: #1ebf5a;
+      text-align: center;
+      line-height: 30px;
+    }
+
+    .l-boat-tab {
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .l-boat-tab > .tab_row {
+      text-align: center;
+      padding: 15px 5px;
+    }
+
+    .l-boat-tab .col{
+      padding: 0 30px;
+    }
+    .l-boat-tab img{
+      width: 100%;
+    }
+
+    .l-boat-table {
+      background-color: #fff;
+      margin-top: 10px;
+    }
+
+    .l-boat-table .table_title {
+      font-size: 14px;
+      height: 15px;
+      display: table;
+      width: 100%;
+      line-height: 1;
+      padding: 15px;
+      border-bottom: 1px solid #bbb;
+    }
+
+    .l-boat-table .table_title .title_1,
+    .l-boat-table .table_title .title_2 {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .l-boat-table .table_title .title_1 {
+      width: 3px;
+      border-radius: 2px;
+      background-color: #619de0;
+      top: 0;
+      position: relative;
+    }
+
+    .l-boat-table .table_title .title_2 {
+      padding-left: 5px;
+      float: left;
+    }
+
+    .l-boat-load-more {
+      margin: 10px;
+      text-align: center;
+      color: #6f6f6f;
+    }
+
+    .table_content_1 ,
+    .table_content_3{
+      padding: 0 15px;
+    }
+
+    .table_content_1 .line,
+    .table_content_3 .line {
+      padding: 10px 0;
+    }
+
+    .table_content_1 .line:nth-child(n+2),
+    .table_content_3 .line:nth-child(n+2) {
+      border-top: 1px solid #dadada;
+    }
+
+    .table_content_1 .line img {
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      float: left;
+    }
+
+    .table_content_1 .line .text {
+      margin-left: 80px;
+      color: #656565;
+      padding: 2px 0;
+    }
+
+    .table_content_1 .line .text_1 {
+      font-size: 14rem;
+      padding-bottom: 3px;
+    }
+
+    .table_content_1 .line .text_2 {
+      white-space: normal;
+      font-size: 12rem;
+      height: 42px;
+      line-height: 14px;
+      word-wrap: break-word;
+      word-break: break-all;
+      overflow: hidden;
+    }
+    .table_content_3 .line img {
+      display: inline-block;
+      width: 70px;
+      height: 50px;
+      float: right;
+    }
+    .table_content_3 .line .text {
+      margin-right: 80px;
+      color: #656565;
+      padding: 2px 0;
+      height: 50px;
+      position: relative;
+    }
+    .table_content_3 .line .text_1,
+    .table_content_3 .line .text_2{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .table_content_3 .line .text_1 {
+      font-size: 14rem;
+      padding-bottom: 3px;
+      color: #000;
+    }
+
+    .table_content_3 .line .text_2 {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      font-size: 12rem;
+    }
+
+    .table_content_2 {
+      border-bottom: 1px solid #bbb;
+      padding: 0 15px;
+      color: #e4e4e4;
+    }
+
+    .table_content_2 .tab_row .col {
+      padding: 10px;
+    }
+    .table_content_2 .tab_row .col img {
+      height: 35px;
+    }
+    .table_content_2 .tab_row .col span {
+      display: block;
+      color: #5d5d5d;
+    }
+    .table_content_2 .tab_row:nth-child(n+2) {
+      border-top: 1px solid #bbb;
+    }
+
+    .table_content_2 .tab_row:first-child .col {
+      border-left: 1px solid #bbb;
+    }
+
+    .table_content_2 .tab_row:first-child .col:last-child {
+      border-right: 1px solid #bbb;
+    }
+
+    .table_content_2 .tab_row:nth-child(n+2) .col {
+      border-left: 1px solid #bbb;
+    }
+
+    .table_content_2 .tab_row:nth-child(n+2) .col:last-child {
+      border-right: 1px solid #bbb;
+    }
+  </style>
+</head>
+<body style="background-color: #e4e4e4;">
+<div class="l-boat-header clearfix">
+  <span class="lt">爱船网</span>
+  <span class="rt" style="font-size:14rem">发布 | 我的</span>
+</div>
+<div class="l-boat-content">
+  <div class="l-boat-title">
+    <div class="title_search">
+      <input type="text" placeholder="请输入查找标题..." class="search_text" style="">
+      <span class="search_button">搜索</span>
+    </div>
+    <img src="img/top_banner.png" style="width: 100%;margin-top: 10px;" alt="">
+  </div>
+  <section class="l-boat-tab">
+    <div class="tab_row row">
+      <a href="javascript:void(0);" class="col col-33">
+        <img src="img/tab_1.png" alt="">
+        <span>空船</span>
+      </a>
+      <a href="javascript:void(0);" class="col col-33">
+        <img src="img/tab_2.png" alt="">
+        <span>买船</span>
+      </a>
+      <a href="javascript:void(0);" class="col col-33">
+        <img src="img/tab_3.png" alt="">
+        <span>求职</span>
+      </a>
+    </div>
+    <div class="tab_row row" style="padding-top: 0;">
+      <a href="javascript:void(0);" class="col col-33">
+        <img src="img/tab_4.png" alt="">
+        <span>货盘</span>
+      </a>
+      <a href="javascript:void(0);" class="col col-33">
+        <img src="img/tab_5.png" alt="">
+        <span>卖船</span>
+      </a>
+      <a href="javascript:void(0);" class="col col-33">
+        <img src="img/tab_6.png" alt="">
+        <span>招聘</span>
+      </a>
+    </div>
+  </section>
+  <section class="l-boat-table">
+    <p class="table_title">
+      <i class="title_1"></i>
+      <span class="title_2">推荐海运信息</span>
+    </p>
+    <div class="table_content_1">
+      <div class="line clearfix">
+        <img src="img/content_1_1.png" alt="">
+        <div class="text">
+          <p class="text_1">空船</p>
+          <p class="text_2">空船海运出港信息咨询,海运港口数据化管理货船租赁,费用咨询,范围介绍等,海港城市地点分布图...</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_1_2.png" alt="">
+        <div class="text">
+          <p class="text_1">货盘</p>
+          <p class="text_2">货盘仓库,货盘堆放管理。管理者人员名单信息。库存数据管理,交接人员出库，核对信息数据，出库管理。</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_1_3.png" alt="">
+        <div class="text">
+          <p class="text_1">求职</p>
+          <p class="text_2">求职信息发布,求职者学历,工作经验所有信息,求职需求...</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_1_4.png" alt="">
+        <div class="text">
+          <p class="text_1">货盘租船</p>
+          <p class="text_2">货盘租船,5000吨外贸货船,散货船,集装船舶,远近距离续航船舶...</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_1_5.png" alt="">
+        <div class="text">
+          <p class="text_1">船舶出售</p>
+          <p class="text_2">2011日本造KASARMAX 07111826重散货船,载重83,494DWT。吃水ON14.6M...</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_1_6.png" alt="">
+        <div class="text">
+          <p class="text_1">出航信息</p>
+          <p class="text_2">南昌号出航马六甲海峡,持续续航抵达欧洲,环太平洋航行46万海里...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="l-boat-table">
+    <p class="table_title">
+      <i class="title_1"></i>
+      <span class="title_2">海运工具</span>
+    </p>
+    <div class="table_content_2">
+      <div class="tab_row row">
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_1.png" alt="">
+          <span>船位查询</span>
+        </a>
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_2.png" alt="">
+          <span>台风查询</span>
+        </a>
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_3.png" alt="">
+          <span>长江水位</span>
+        </a>
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_4.png" alt="">
+          <span>航次计算</span>
+        </a>
+      </div>
+      <div class="tab_row row">
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_5.png" alt="">
+          <span>海员证书</span>
+        </a>
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_6.png" alt="">
+          <span>海员成绩</span>
+        </a>
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_7.png" alt="">
+          <span>培训机构</span>
+        </a>
+        <a href="javascript:void(0);" class="col col-25">
+          <img src="img/content_2_8.png" alt="">
+          <span>海员外派</span>
+        </a>
+      </div>
+    </div>
+    <p style="height: 15px;"></p>
+  </section>
+  <section class="l-boat-table">
+    <p class="table_title">
+      <i class="title_1"></i>
+      <span class="title_2">热点海运新闻</span>
+    </p>
+    <div class="table_content_3">
+      <div class="line clearfix">
+        <img src="img/content_3_1.png" alt="">
+        <div class="text">
+          <p class="text_1">海运部通知</p>
+          <p class="text_2">2017年7月12日</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_3_2.png" alt="">
+        <div class="text">
+          <p class="text_1">欧盟海运联合经济</p>
+          <p class="text_2">2017年7月12日</p>
+        </div>
+      </div>
+      <div class="line clearfix">
+        <img src="img/content_3_3.png" alt="">
+        <div class="text">
+          <p class="text_1">国内有名的海运公司排行榜</p>
+          <p class="text_2">2017年7月12日</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="l-boat-load-more">
+    加载更多
+  </div>
+  <div class="l-boat-footer">
+    <img src="img/foot_icon.png" style="width: 100%;margin-top: 5px;" alt="">
+    <p>沪ICP备14027757号</p>
+  </div>
+</div>
+
+</body>
+</html>

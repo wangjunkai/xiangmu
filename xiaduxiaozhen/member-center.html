@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="MobileOptimized" content="420">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <title>会员中心</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="plugin/css/rippler.min.css">
+    <script src="plugin/js/jquery-1.12.4.min.js"></script>
+    <script src="plugin/js/jquery.rippler.min.js"></script>
+    <script src="js/global.js"></script>
+    <style>
+        .weilai-member-top {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .weilai-member-top li {
+            flex: auto;
+            position: relative;
+        }
+
+        .weilai-member-top .member-top_text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 70px;
+            color: #fff;
+            font-size: 16px;
+            position: relative;
+        }
+
+        .weilai-member-top .member-top_text img {
+            width: 20px;
+            margin-left: 15px;
+        }
+
+        .weilai-member-top .member-top_text_shop {
+            background-color: #3c197f;
+        }
+
+        .weilai-member-top .member-top_text_foot {
+            background-color: #e05d27;
+        }
+
+        .weilai-member-top li.active.member-top_text_shop:after,
+        .weilai-member-top li.active.member-top_text_foot:after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            margin-left: -10px;
+        }
+
+        .weilai-member-top li.active.member-top_text_shop:after {
+            border-color: #3c197f transparent transparent transparent;
+        }
+
+        .weilai-member-top li.active.member-top_text_foot:after {
+            border-color: #e05d27 transparent transparent transparent
+        }
+
+        .weilai-member-shop .member-shop_integral {
+            margin: 30px 45px;
+            border-radius: 6px;
+            background-color: #f4dac1;
+            text-align: center;
+            padding: 40px 0 20px 0;
+        }
+
+        .weilai-member-shop .member-shop_integral_num {
+            display: inline-block;
+            border-radius: 100px;
+            background-color: #e05d27;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .weilai-member-shop .member-shop_integral_num:before {
+            content: '';
+            width: 66px;
+            height: 66px;
+            position: absolute;
+            left: -3px;
+            top: -3px;
+            border: 1px solid #ef946e;
+            border-radius: 100px;
+            display: inline-block;
+        }
+
+        .weilai-member-shop .member-shop_integral_text {
+            font-size: 12px;
+            color: #e05d27;
+            margin: 10px 0 10px 0;
+        }
+
+        .weilai-member-shop .member-shop_integral_name {
+            font-size: 19px;
+            color: #777777;
+        }
+
+        .weilai-member-shop .member-shop_integral_name:before,
+        .weilai-member-shop .member-shop_integral_name:after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            border-top: 1px solid #e49d7f;
+            vertical-align: middle;
+            margin: 0 6px;
+        }
+
+        .weilai-member-shop .member-shop_line {
+            margin: 20px;
+            border-top: 1px dashed #f4dac1;
+        }
+
+        .member-shop_content > li {
+            display: flex;
+            flex-direction: row;
+            padding: 0 15px;
+            margin-bottom: 15px;
+            color: #e05d27;
+        }
+
+        .member-shop_content .shop_content_coupons,
+        .member-shop_content .shop_content_buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .member-shop_content .shop_content_coupons {
+            width: 70%;
+            background-image: url("image/coupons/coupons-active.png");
+            background-repeat: no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+            background-position: center;
+            height: 90px;
+            padding: 10px 15px;
+            flex-direction: row;
+            font-size: 12px;
+        }
+
+        .member-shop_content .member-shop_content_not_use .shop_content_coupons {
+            background-image: url("image/coupons/coupons.png");
+        }
+
+        .member-shop_content .shop_content_buttons {
+            width: 30%;
+        }
+
+        .member-shop_content .shop_content_buttons_num {
+            width: 60%;
+            line-height: 1.7;
+            text-align: center;
+            color: #fff;
+            background-color: #e05d27;
+            border-radius: 100px;
+            font-size: 12px;
+        }
+
+        .member-shop_content .member-shop_content_not_use .shop_content_buttons_num {
+            background-color: #828282;
+        }
+
+        .member-shop_content .shop_content_buttons_text {
+            width: 75%;
+            line-height: 1.5;
+            text-align: center;
+            background-color: transparent;
+            border-radius: 100px;
+            font-size: 12px;
+            margin-top: 5px;
+            border: 1px solid #998cb3;
+        }
+
+        .member-shop_content .member-shop_content_not_use .shop_content_buttons_text {
+            border: 1px solid #828282;
+        }
+
+        .member-shop_content .shop_content_coupons_text {
+            width: 70%;
+            padding-left: 5px;
+        }
+
+        .member-shop_content .shop_content_coupons_use {
+            width: 25%;
+            text-align: center;
+            border-left: 1px dashed;
+        }
+
+        .member-shop_content .shop_content_coupons_text .num {
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .member-shop_content .shop_content_coupons_text .price {
+            font-weight: 600;
+        }
+
+        .member-shop_content .shop_content_coupons_text .icon {
+            background: url("image/coupons/icon-active.png") no-repeat;
+            background-size: contain;
+            width: 15px;
+            vertical-align: middle;
+            margin-left: 10px;
+            height: 3em;
+            display: inline-block;
+        }
+
+        .member-shop_content .member-shop_content_not_use .shop_content_coupons_text .icon {
+            background-image: url("image/coupons/icon.png");
+        }
+
+        .member-shop_content .shop_content_coupons_text .text > li {
+            line-height: 1.5;
+        }
+
+        .member-shop_content .shop_content_coupons_use .use {
+            width: 1em;
+            font-size: 14px;
+            display: inline-block;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .member-shop_content .shop_content_coupons_use .use:after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-image: url("image/coupons/more-active.png");
+            background-repeat: no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            margin-top: -7px;
+        }
+
+        .member-shop_content .member-shop_content_not_use .shop_content_coupons_use .use:after {
+            background-image: url("image/coupons/more.png");
+        }
+
+        .member-shop_content .member-shop_content_not_use {
+            color: #828282;
+        }
+
+        .weilai-member-content {
+            display: none;
+        }
+
+        .weilai-member-content.active {
+            display: block;
+        }
+
+        .weilai-member-foot {
+            padding: 40px 25px;
+        }
+
+        .weilai-member-foot_group .foot_group_icon {
+            width: 50px;
+        }
+
+        .foot_group_progress {
+            height: 120px;
+            width: 7px;
+            position: relative;
+            top: 5px;
+        }
+
+        .foot_group_progress.progress_long {
+            height: 200px;
+        }
+
+        .foot_group_progress .before {
+            width: 100%;
+            display: inline-block;
+            background-color: #e05d27;
+            border-radius: 100px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .foot_group_progress .after {
+            height: 100%;
+            width: 100%;
+            display: inline-block;
+            background-color: #f3dac1;
+            border-radius: 100px;
+            position: absolute;
+        }
+
+        .weilai-member-foot_group {
+            padding-left: 20px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .weilai-member-foot_group .foot_group_left {
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weilai-member-foot_group .foot_group_right {
+            flex: 1;
+        }
+
+        .weilai-member-foot_group .foot_group_num {
+            display: inline-block;
+            border-radius: 100px;
+            background-color: #e05d27;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .weilai-member-foot_group .foot_group_talk {
+            font-size: 12px;
+            color: #e05d27;
+            width: 90%;
+            padding: 20px;
+            border-radius: 6px;
+            background-color: #f3dac1;
+            margin: 20px auto;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .weilai-member-foot_group .foot_group_talk:before {
+            content: '';
+            display: inline-block;
+            width: 100%;
+            height: 10px;
+            background-image: url("image/member/talk.png");
+            background-repeat: no-repeat;
+            position: absolute;
+            left: -6px;
+            top: -4px;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('.weilai-member-top li').click(function () {
+                $('.weilai-member-top li').removeClass('active');
+                $(this).addClass('active');
+                $('.weilai-member-content').removeClass('active');
+                if ($(this).data('type') === 'shop') {
+                    $('.weilai-member-shop').addClass('active');
+                } else {
+                    $('.weilai-member-foot').addClass('active');
+                }
+            })
+
+        })
+    </script>
+</head>
+<body>
+<div class="weilai-container">
+    <div class="weilai-member weilai-index-background">
+        <ul class="weilai-member-top">
+            <li class="member-top_text_shop active" data-type="shop">
+                <span class="member-top_text rippler rippler-default">积分商城
+            <img src="image/member/shop.png" alt=""></span></li>
+            <li class="member-top_text_foot"><span class="member-top_text rippler rippler-default">会员足迹
+        <img src="image/member/foot.png" alt=""></span></li>
+        </ul>
+        <div class="weilai-member-content weilai-member-shop active">
+            <div class="member-shop_integral">
+                <span class="member-shop_integral_num">798`</span>
+                <p class="member-shop_integral_text">可用积分</p>
+                <span class="member-shop_integral_name">Maria Elliott</span>
+            </div>
+            <p class="member-shop_line"></p>
+            <ul class="member-shop_content">
+                <li>
+                    <div class="shop_content_coupons">
+                        <div class="shop_content_coupons_text">
+                            <p class="price">¥<span class="num">15</span>元
+                                <i class="icon"></i>
+                            </p>
+                            <ul class="text">
+                                <li>满99元减15元</li>
+                                <li>限2018.3.31前使用</li>
+                            </ul>
+                        </div>
+                        <div class="shop_content_coupons_use">
+                        <span class="use">
+                            立即使用
+                        </span>
+                        </div>
+                    </div>
+                    <div class="shop_content_buttons">
+                        <span class="shop_content_buttons_num">699`</span>
+                        <span class="shop_content_buttons_text rippler rippler-default">确认兑换</span>
+                    </div>
+                </li>
+                <li class="member-shop_content_not_use">
+                    <div class="shop_content_coupons">
+                        <div class="shop_content_coupons_text">
+                            <p class="price"><span class="num">5</span>折
+                                <i class="icon"></i>
+                            </p>
+                            <ul class="text">
+                                <li>满99元减15元</li>
+                                <li>限2018.3.31前使用</li>
+                            </ul>
+                        </div>
+                        <div class="shop_content_coupons_use">
+                        <span class="use">
+                            立即使用
+                        </span>
+                        </div>
+                    </div>
+                    <div class="shop_content_buttons">
+                        <span class="shop_content_buttons_num">699`</span>
+                        <span class="shop_content_buttons_text">积分不足</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="shop_content_coupons">
+                        <div class="shop_content_coupons_text">
+                            <p class="price">¥<span class="num">15</span>元
+                                <i class="icon"></i>
+                            </p>
+                            <ul class="text">
+                                <li>满99元减15元</li>
+                                <li>限2018.3.31前使用</li>
+                            </ul>
+                        </div>
+                        <div class="shop_content_coupons_use">
+                        <span class="use">
+                            立即使用
+                        </span>
+                        </div>
+                    </div>
+                    <div class="shop_content_buttons">
+                        <span class="shop_content_buttons_num">699`</span>
+                        <span class="shop_content_buttons_text rippler rippler-default">确认兑换</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="weilai-member-content weilai-member-foot">
+            <div class="weilai-member-foot_group">
+                <div class="foot_group_left">
+                    <img class="foot_group_icon" src="image/member/foot-active.png" alt="">
+                    <div class="foot_group_progress">
+                        <i class="before" style="height: 80%;"></i>
+                        <i class="after"></i>
+                    </div>
+                </div>
+                <div class="foot_group_right">
+                    <div class="foot_group_talk">
+                        <p>"2018.09.23"</p>
+                        <p>欢迎加入味莱超市会员</p>
+                    </div>
+                </div>
+            </div>
+            <div class="weilai-member-foot_group">
+                <div class="foot_group_left">
+                    <span class="foot_group_num">3999</span>
+                    <div class="foot_group_progress progress_long">
+                        <i class="before" style="height: 0;"></i>
+                        <i class="after"></i>
+                    </div>
+                </div>
+                <div class="foot_group_right">
+                    <div class="foot_group_talk">
+                        <p>"2018.09.23"</p>
+                        <p>欢迎加入味莱超市会员</p>
+                    </div>
+                </div>
+            </div>
+            <div class="weilai-member-foot_group">
+                <div class="foot_group_left">
+                    <span class="foot_group_num">8999</span>
+                    <div class="foot_group_progress progress_long">
+                        <i class="before" style="height: 0;"></i>
+                        <i class="after"></i>
+                    </div>
+                </div>
+                <div class="foot_group_right">
+                    <div class="foot_group_talk">
+                        <p>"2018.09.23"</p>
+                        <p>欢迎加入味莱超市会员</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

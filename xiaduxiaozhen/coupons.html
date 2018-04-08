@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="MobileOptimized" content="420">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <title>优惠券</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="plugin/css/rippler.min.css">
+    <script src="plugin/js/jquery-1.12.4.min.js"></script>
+    <script src="plugin/js/jquery.rippler.min.js"></script>
+    <script src="js/global.js"></script>
+    <style>
+        .weilai-coupons-top {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+            border-bottom: 1px solid #9c9c9c;
+        }
+
+        .weilai-coupons-top li {
+            flex: auto;
+            text-align: center;
+            font-size: 14px;
+            color: #525252;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .weilai-coupons-top li.active {
+            color: #ef2c2c;
+        }
+
+        .weilai-coupons-top li.active:before {
+            content: '';
+            display: inline-block;
+            width: 60px;
+            border-bottom: 2px solid #ef2c2c;
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            margin-left: -30px;
+        }
+
+        .weilai-coupons-group {
+            display: none;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_text {
+            width: 70%;
+            padding-left: 5px;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_use {
+            width: 25%;
+            text-align: center;
+            border-left: 1px dashed;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_text .num {
+            font-size: 36px;
+            margin: 0 5px;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_text .price {
+            font-weight: 600;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_text .icon {
+            background: url("image/coupons/icon-active.png") no-repeat;
+            background-size: contain;
+            width: 15px;
+            vertical-align: middle;
+            margin-left: 10px;
+            height: 3em;
+            display: inline-block;
+        }
+
+        .weilai-coupons-group.weilai-coupons-group_not_use .shop_content_coupons_text .icon {
+            background-image: url("image/coupons/icon.png");
+        }
+
+        .weilai-coupons-group .shop_content_coupons_text .text > li {
+            line-height: 1.5;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_use .use {
+            width: 1em;
+            font-size: 14px;
+            display: inline-block;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .weilai-coupons-group .shop_content_coupons_use .use:after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-image: url("image/coupons/more-active.png");
+            background-repeat: no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            margin-top: -7px;
+        }
+
+        .weilai-coupons-group.weilai-coupons-group_not_use .shop_content_coupons_use .use:after {
+            background-image: url("image/coupons/more.png");
+        }
+
+        .weilai-coupons-group .shop_content_coupons,
+        .weilai-coupons-group .shop_content_buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .weilai-coupons-group .shop_content_coupons {
+            background-image: url("image/coupons/coupons-active.png");
+            background-repeat: no-repeat;
+            -webkit-background-size: contain;
+            background-size: 100% 100%;
+            background-position: center;
+            height: 120px;
+            padding: 10px 15px;
+            flex-direction: row;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .weilai-coupons-group.weilai-coupons-group_not_use .shop_content_coupons {
+            background-image: url("image/coupons/coupons.png");
+        }
+
+        .weilai-coupons-group {
+            padding: 0 15px;
+        }
+
+        .weilai-coupons-group_no_use {
+            color: #e05d27;
+        }
+
+        .weilai-coupons-group_not_use {
+            color: #828282;
+        }
+
+        .weilai-coupons-group.active {
+            display: block;
+        }
+
+        .weilai-coupons-button {
+            margin: 15px;
+            font-size: 13px;
+            color: #ef2c2c;
+            text-align: center;
+            border: 1px solid #b5b5b5;
+            border-radius: 3px;
+            line-height: 3.5em;
+        }
+
+        .weilai-coupons-button img {
+            width: 16px;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('.weilai-coupons-top li').click(function () {
+                $('.weilai-coupons-top li').removeClass('active');
+                $(this).addClass('active');
+                $('.weilai-coupons-group').removeClass('active');
+                if ($(this).data('type') === 'noUse') {
+                    $('.weilai-coupons-group_no_use').addClass('active');
+                } else if ($(this).data('type') === 'use') {
+                    $('.weilai-coupons-group_use').addClass('active');
+                } else {
+                    $('.weilai-coupons-group_failure').addClass('active');
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="weilai-container">
+    <div class="weilai-coupons weilai-index-background">
+        <ul class="weilai-coupons-top">
+            <li class="active" data-type="noUse">未使用</li>
+            <li data-type="use">已使用</li>
+            <li data-type="failure">已失效</li>
+        </ul>
+        <div class="weilai-coupons-group weilai-coupons-group_no_use active">
+            <div class="shop_content_coupons">
+                <div class="shop_content_coupons_text">
+                    <p class="price">¥<span class="num">15</span>元
+                        <i class="icon"></i>
+                    </p>
+                    <ul class="text">
+                        <li>满99元减15元</li>
+                        <li>限2018.3.31前使用</li>
+                    </ul>
+                </div>
+                <div class="shop_content_coupons_use">
+                        <span class="use">
+                            立即使用
+                        </span>
+                </div>
+            </div>
+            <div class="shop_content_coupons">
+                <div class="shop_content_coupons_text">
+                    <p class="price">¥<span class="num">15</span>元
+                        <i class="icon"></i>
+                    </p>
+                    <ul class="text">
+                        <li>满99元减15元</li>
+                        <li>限2018.3.31前使用</li>
+                    </ul>
+                </div>
+                <div class="shop_content_coupons_use">
+                <span class="use">
+                    立即使用
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="weilai-coupons-group weilai-coupons-group_not_use weilai-coupons-group_use">
+            <div class="shop_content_coupons">
+                <div class="shop_content_coupons_text">
+                    <p class="price">¥<span class="num">15</span>元
+                        <i class="icon"></i>
+                    </p>
+                    <ul class="text">
+                        <li>满99元减15元</li>
+                        <li>限2018.3.31前使用</li>
+                    </ul>
+                </div>
+                <div class="shop_content_coupons_use">
+                        <span class="use">
+                            立即使用
+                        </span>
+                </div>
+            </div>
+            <div class="shop_content_coupons">
+                <div class="shop_content_coupons_text">
+                    <p class="price">¥<span class="num">15</span>元
+                        <i class="icon"></i>
+                    </p>
+                    <ul class="text">
+                        <li>满99元减15元</li>
+                        <li>限2018.3.31前使用</li>
+                    </ul>
+                </div>
+                <div class="shop_content_coupons_use">
+                <span class="use">
+                    立即使用
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="weilai-coupons-group weilai-coupons-group_not_use weilai-coupons-group_failure">
+            <div class="shop_content_coupons">
+                <div class="shop_content_coupons_text">
+                    <p class="price">¥<span class="num">15</span>元
+                        <i class="icon"></i>
+                    </p>
+                    <ul class="text">
+                        <li>满99元减15元</li>
+                        <li>限2018.3.31前使用</li>
+                    </ul>
+                </div>
+                <div class="shop_content_coupons_use">
+                        <span class="use">
+                            立即使用
+                        </span>
+                </div>
+            </div>
+            <div class="shop_content_coupons">
+                <div class="shop_content_coupons_text">
+                    <p class="price">¥<span class="num">15</span>元
+                        <i class="icon"></i>
+                    </p>
+                    <ul class="text">
+                        <li>满99元减15元</li>
+                        <li>限2018.3.31前使用</li>
+                    </ul>
+                </div>
+                <div class="shop_content_coupons_use">
+                <span class="use">
+                    立即使用
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="weilai-coupons-button rippler rippler-default"><img src="image/coupons/yuan.png" alt="">去积分商城逛逛>></div>
+    </div>
+</div>
+</body>
+</html>
